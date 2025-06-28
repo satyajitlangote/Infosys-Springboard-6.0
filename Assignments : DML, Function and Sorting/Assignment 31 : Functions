@@ -1,0 +1,27 @@
+A discount of 22.5% being offered on all sports category item's unit price, Write a query to display product id, product description, existing unit price as "Old_Price" and discounted price as "New_Price" for sports category item. Round off the discounted price to two decimal places.
+Write your query here
+  
+Database structure
+Salesman (Sid, Sname, Location)
+Product (Prodid, Pdesc, Price, Category, Discount)
+Sale (Saleid, Sid, Sldate, Amount)
+Saledetail (Saleid, Prodid, Quantity)
+
+Expected Result
+PRODID	  PDESC	      Old_Price	New_Price
+101	      Basketball	    10	   7.75
+104	      Cricket Bat	    20	  15.5
+
+Query Result :-
+
+SELECT 
+    Prodid AS "PRODID",
+    Pdesc AS "PDESC",
+    Price AS "Old_Price",
+    ROUND(Price * (1 - 0.225), 2) AS "New_Price"
+FROM 
+    Product
+WHERE 
+    UPPER(Category) = 'SPORTS'
+ORDER BY 
+    Prodid;
