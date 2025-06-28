@@ -1,0 +1,45 @@
+The management of EasyShop would like to classify the salary of employees as Class 3, Class 2 and Class 1. The classification is done as if salary is less than 2500 then the class is 'Class 3' , if between 2500 and 5000 then 'Class 2', and if salary is more than 5000 then 'Class 1'. Write a query to display EmpId, Salary and classification of salary.
+  
+Database structure
+Item (Itemcode, Itemtype, Descr, Price, Reorderlevel, Qtyonhand, Category)
+Quotation (Quotationid, Sname, Itemcode, Quotedprice, Qdate, Qstatus)
+Orders (Orderid, Quotationid, Qtyordered, Orderdate, Status, Pymtdate, Delivereddate, Amountpaid, Pymtmode)
+Retailoutlet (Roid, Location, Managerid)
+Empdetails (Empid, Empname, Designation, Emailid, Contactno, Worksin, Salary)
+Retailstock (Roid, Itemcode, Unitprice, Qtyavailable)
+Customer (Custid, Custtype, Custname, Gender, Spouse, Emailid, Address)
+Purchasebill (Billid, Roid, Itemcode, Custid, Billamount, Billdate, Quantity)
+
+
+EMPID	SALARY	SALGRADE
+1001	6000	  Class 1
+1002	6500	  Class 1
+1003	3000	  Class 2
+1004	9000	  Class 1
+1005	6000	  Class 1
+1006	6500	  Class 1
+1007	3000	  Class 2
+1008	5000	  Class 2
+1009	5000	  Class 2
+1010	2800	  Class 2
+1011	2900	  Class 2
+1012	2500	  Class 2
+1013	2000	  Class 3
+1014	2000	  Class 3
+
+
+Query :-
+
+SELECT 
+    Empid,
+    Salary,
+    CASE 
+        WHEN Salary < 2500 THEN 'Class 3'
+        WHEN Salary BETWEEN 2500 AND 5000 THEN 'Class 2'
+        WHEN Salary > 5000 THEN 'Class 1'
+    END AS SALGRADE
+FROM 
+    Empdetails
+ORDER BY 
+    Empid;
+
