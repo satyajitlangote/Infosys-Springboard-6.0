@@ -1,0 +1,12 @@
+Query :-  
+
+
+SELECT
+    Prodid,
+    Pdesc,
+    Price
+FROM
+    Product
+ORDER BY
+    Price DESC,
+    Prodid DESC;
