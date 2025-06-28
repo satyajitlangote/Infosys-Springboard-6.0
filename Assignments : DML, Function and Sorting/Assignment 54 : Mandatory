@@ -1,0 +1,28 @@
+Retrieve the employee id, employee name of billing staff and the retail outlet where they work. Perform a case insensitive search.
+Write your query here
+  
+Database structure
+Item (Itemcode, Itemtype, Descr, Price, Reorderlevel, Qtyonhand, Category)
+Quotation (Quotationid, Sname, Itemcode, Quotedprice, Qdate, Qstatus)
+Orders (Orderid, Quotationid, Qtyordered, Orderdate, Status, Pymtdate, Delivereddate, Amountpaid, Pymtmode)
+Retailoutlet (Roid, Location, Managerid)
+Empdetails
+Retailstock (Roid, Itemcode, Unitprice, Qtyavailable)
+Customer
+Purchasebill (Billid, Roid, Itemcode, Custid, Billamount, Billdate, Quantity)
+
+
+Query :-
+
+SELECT 
+    e.Empid AS "Employee ID",
+    e.Empname AS "Employee Name",
+    r.Location AS "Retail Outlet"
+FROM 
+    Empdetails e
+JOIN 
+    Retailoutlet r ON e.Worksin = r.Roid
+WHERE 
+    LOWER(e.Designation) = 'billing staff'
+ORDER BY 
+    e.Empid;
