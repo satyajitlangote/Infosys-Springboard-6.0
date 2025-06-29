@@ -1,0 +1,27 @@
+Retrieve the maximum salary, minimum salary, total salary and average salary of employees.
+
+  
+Database structure
+Item (Qtyonhand, Category, Itemcode, Itemtype, Descr, Price, Reorderlevel)
+Quotation (Quotationid, Sname, Itemcode, Quotedprice, Qdate, Qstatus)
+Orders (Orderid, Quotationid, Qtyordered, Orderdate, Status, Pymtdate, Delivereddate, Amountpaid, Pymtmode)
+Retailoutlet (Roid, Location, Managerid)
+Empdetails (Empid, Empname, Designation, Emailid, Contactno, Worksin, Salary)
+Retailstock (Roid, Itemcode, Unitprice, Qtyavailable)
+Customer (Custid, Custtype, Custname, Gender, Spouse, Emailid, Address)
+Purchasebill (Billid, Roid, Itemcode, Custid, Billamount, Billdate, Quantity)
+
+
+MAXSAL  	MINSAL	  TOTALSAL  	AVGSAL
+9000	    2000	    62200	      4442.8571428
+
+
+Query :-
+
+SELECT 
+    MAX(Salary) AS MAXSAL,
+    MIN(Salary) AS MINSAL,
+    SUM(Salary) AS TOTALSAL,
+    AVG(Salary) AS AVGSAL
+FROM 
+    Empdetails;
