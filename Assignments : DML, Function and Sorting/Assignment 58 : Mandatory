@@ -1,0 +1,18 @@
+Display current date as 'Mon/DD/YYYY Day'
+Write your query here
+  
+Query Result
+CURRENTDATE
+Jun/29/2025 Sunday
+1 row(s) selected
+Expected Result
+CURRENTDATE
+Jun/29/2025 Sunday
+
+
+
+Query :-
+
+SELECT TO_CHAR(SYSDATE, 'Mon/DD/YYYY Day') AS CURRENTDATE
+FROM DUAL;
+
