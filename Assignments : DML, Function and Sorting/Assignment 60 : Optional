@@ -1,0 +1,30 @@
+Retrieve the order id and the number of days between order date and payment date for all orders. The number of days should be displayed as positive values.
+
+  
+Database structure
+Item (Itemcode, Itemtype, Descr, Price, Reorderlevel, Qtyonhand, Category)
+Quotation (Quotationid, Sname, Itemcode, Quotedprice, Qdate, Qstatus)
+Orders (Orderid, Quotationid, Qtyordered, Orderdate, Status, Pymtdate, Delivereddate, Amountpaid, Pymtmode)
+Retailoutlet (Roid, Location, Managerid)
+Empdetails (Empid, Empname, Designation, Emailid, Contactno, Worksin, Salary)
+Retailstock (Roid, Itemcode, Unitprice, Qtyavailable)
+Customer (Custid, Custtype, Custname, Gender, Spouse, Emailid, Address)
+Purchasebill (Billid, Roid, Itemcode, Custid, Billamount, Billdate, Quantity)
+
+
+ORDERID  	NOOFDAYS
+  O1001	      6
+  O1002	      NULL
+  O1003	      3
+  O1004	      10
+  O1005	      2
+  O1006	      2
+  O1007	      NULL
+  O1008	       NULL
+
+QUERY :-
+
+SELECT 
+  Orderid,
+  ABS(Pymtdate - Orderdate) AS NoOfDays
+FROM Orders
