@@ -1,0 +1,19 @@
+Display employee id, name and department along with computer id and make of computers allocated to them.
+
+
+Database structure
+Computer (Compid, Make, Model, Myear)
+Employee (Id, Ename, Doj, Salary, Bonus, Dept, Designation, Manager, Compid)
+
+
+ID	  ENAME	          DEPT	    COMPID	  MAKE
+1	    JamesPotter	    ICP      	1001	    Dell
+3	     EmilyRayner	  ETA	      1002	    Dell
+5	    AyazMohammad	  ICP	      1003	    Lenovo
+
+
+Querry :-
+
+SELECT e.Id, e.Ename, e.Dept, c.Compid, c.Make
+FROM Employee e
+JOIN Computer c ON e.Compid = c.Compid;
