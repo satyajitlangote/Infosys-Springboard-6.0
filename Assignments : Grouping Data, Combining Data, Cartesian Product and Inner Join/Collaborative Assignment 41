@@ -1,0 +1,31 @@
+Display the month and number of quotations received in each month.
+
+
+Database structure
+Item (Itemcode, Itemtype, Descr, Price, Reorderlevel, Qtyonhand, Category)
+Quotation (Qdate, Qstatus, Quotationid, Sname, Itemcode, Quotedprice)
+Orders (Orderid, Quotationid, Qtyordered, Orderdate, Status, Pymtdate, Delivereddate, Amountpaid, Pymtmode)
+Retailoutlet (Roid, Location, Managerid)
+Empdetails (Empid, Empname, Designation, Emailid, Contactno, Worksin, Salary)
+Retailstock (Roid, Itemcode, Unitprice, Qtyavailable)
+Customer (Custid, Custtype, Custname, Gender, Spouse, Emailid, Address)
+Purchasebill (Billid, Roid, Itemcode, Custid, Billamount, Billdate, Quantity)
+
+
+MONTH	  QUOTATIONCOUNT
+June	        5
+January	      2
+October	      4
+November    	2
+
+Query :-
+
+SELECT 
+    TO_CHAR(Qdate, 'Month') AS "MONTH",
+    COUNT(Quotationid) AS "QUOTATIONCOUNT"
+FROM 
+    Quotation
+GROUP BY 
+    TO_CHAR(Qdate, 'Month')
+ORDER BY 
+    MIN(EXTRACT(MONTH FROM Qdate));
