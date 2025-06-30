@@ -1,0 +1,27 @@
+Display details of salesmen whose name contains character 'e' and whose location contains character 'o'. Also display salesmen whose name contains character 'a' and whose location contains character 'a'. Use UNION ALL clause for the same.
+Write your query here
+  
+Database structure
+Salesman (Sid, Sname, Location)
+Product (Prodid, Pdesc, Price, Category, Discount)
+Sale (Saleid, Sid, Sldate, Amount)
+Saledetail (Saleid, Prodid, Quantity)
+
+
+SID  	SNAME  	LOCATION
+1	    Peter	  London
+5	    Kevin	  London
+6	    Alex	  Chicago
+2	    Michael	Paris
+4	    Harry	  Chicago
+
+Query :-
+SELECT Sid, Sname, Location
+FROM Salesman
+WHERE Sname LIKE '%e%' AND Location LIKE '%o%'
+
+UNION ALL
+
+SELECT Sid, Sname, Location
+FROM Salesman
+WHERE Sname LIKE '%a%' AND Location LIKE '%a%';
