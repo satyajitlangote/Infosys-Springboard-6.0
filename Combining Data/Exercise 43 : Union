@@ -1,0 +1,29 @@
+Display id and name for salesmen along with id and category of products in a single table. Indicate the source of the row in result by adding an additional column TYPE with possible values as 'S' (Salesman) and 'P' (Product). Display all rows.
+
+Database structure
+Salesman (Sid, Sname, Location)
+Product (Prodid, Pdesc, Price, Category, Discount)
+Sale (Saleid, Sid, Sldate, Amount)
+Saledetail (Saleid, Prodid, Quantity)
+
+
+
+TYPE	  ID	  DETAILS
+S      	1    	Peter
+S	      2    	Michael
+S      	3	    John
+S	      4	    Harry
+S	      5	    Kevin
+S	      6	    Alex
+P	      101	  Sports
+P	      102  	Apparel
+P	      103	  Electronics
+P       104	  Sports
+P	      105  	Apparel
+P	      106   ELECTRONICS
+
+Query:
+
+SELECT 'S' AS TYPE, Sid AS ID, Sname AS DETAILS FROM Salesman
+UNION ALL
+SELECT 'P' AS TYPE, Prodid AS ID, Category AS DETAILS FROM Product;
