@@ -1,0 +1,19 @@
+Display department and number of computers made by Dell allocated in that department.
+
+  
+Database structure
+Computer (Compid, Make, Model, Myear)
+Employee (Id, Ename, Doj, Salary, Bonus, Dept, Designation, Manager, Compid)
+
+
+DEPT	NUMBER OF COMPUTERS
+ETA	        1
+ICP	        1
+
+Query :-
+
+SELECT e.Dept AS "DEPT", COUNT(c.Compid) AS "NUMBER OF COMPUTERS"
+FROM Employee e
+JOIN Computer c ON e.Compid = c.Compid
+WHERE c.Make = 'Dell'
+GROUP BY e.Dept;
