@@ -1,0 +1,30 @@
+Display pymtmode, and total number of payments for those payments which were paid before the year 2015 and total number of payments should be more than 1.
+
+
+  
+Database structure
+Item (Itemcode, Itemtype, Descr, Price, Reorderlevel, Qtyonhand, Category)
+Quotation (Quotationid, Sname, Itemcode, Quotedprice, Qdate, Qstatus)
+Orders (Orderid, Quotationid, Qtyordered, Orderdate, Status, Pymtdate, Delivereddate, Amountpaid, Pymtmode)
+Retailoutlet (Roid, Location, Managerid)
+Empdetails (Empid, Empname, Designation, Emailid, Contactno, Worksin, Salary)
+Retailstock (Roid, Itemcode, Unitprice, Qtyavailable)
+Customer (Custid, Custtype, Custname, Gender, Spouse, Emailid, Address)
+Purchasebill (Billid, Roid, Itemcode, Custid, Billamount, Billdate, Quantity)
+
+
+PYMTMODE	PYMTCOUNT
+Cash	        2
+
+Query :-
+SELECT 
+    Pymtmode AS "PYMTMODE",
+    COUNT(Orderid) AS "PYMTCOUNT"
+FROM 
+    Orders
+WHERE 
+    Pymtdate < TO_DATE('01-01-2015', 'DD-MM-YYYY')
+GROUP BY 
+    Pymtmode
+HAVING 
+    COUNT(Orderid) > 1;
