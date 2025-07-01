@@ -1,0 +1,28 @@
+Identify the average salary of the jobs 'MANAGER' and 'ANALYST'. Display job, average salary if the identified average salary is more than 1500.
+
+
+Database structure
+Dept (Deptno, Dname, Loc)
+Emp (Empno, Ename, Job, Mgr, Hiredate, Sal, Comm, Deptno)
+Vehicle (Vehicleid, Vehiclename)
+Empvehicle (Empno, Vehicleid)
+
+  JOB	      AverageSalary
+  ANALYST	  3000
+  MANAGER	  2758.333333333333333333333333333333333333
+
+Query :-
+
+SELECT 
+    Job AS "JOB",
+    AVG(Sal) AS "Average Salary"
+FROM 
+    Emp
+WHERE 
+    Job IN ('MANAGER', 'ANALYST')
+GROUP BY 
+    Job
+HAVING 
+    AVG(Sal) > 1500
+ORDER BY 
+    Job;
