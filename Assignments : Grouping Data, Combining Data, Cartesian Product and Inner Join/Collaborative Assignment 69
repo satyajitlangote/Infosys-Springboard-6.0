@@ -1,0 +1,33 @@
+Refer to the tables emp,dept and empvehicle for the following assignments :
+
+List the department names that have more than one employee drawing salary more than 1500, working under it.
+Write your query here
+  
+Database structure
+Dept (Deptno, Dname, Loc)
+Emp (Empno, Ename, Job, Mgr, Hiredate, Sal, Comm, Deptno)
+Vehicle (Vehicleid, Vehiclename)
+Empvehicle (Empno, Vehicleid)
+
+
+DNAME
+RESEARCH
+SALES
+ACCOUNTING
+
+Query :-
+
+SELECT 
+    d.Dname AS "DNAME"
+FROM 
+    Emp e
+JOIN 
+    Dept d ON e.Deptno = d.Deptno
+WHERE 
+    e.Sal > 1500
+GROUP BY 
+    d.Dname
+HAVING 
+    COUNT(e.Empno) > 1
+ORDER BY 
+    d.Dname;
