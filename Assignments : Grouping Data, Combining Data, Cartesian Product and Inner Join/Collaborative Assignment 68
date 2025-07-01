@@ -1,0 +1,30 @@
+Refer to the tables emp,dept and empvehicle for the following assignments :
+
+Display the name of employees and their department names whose job designation is 'MANAGER'.
+Write your query here
+  
+Database structure
+Dept (Deptno, Dname, Loc)
+Emp (Empno, Ename, Job, Mgr, Hiredate, Sal, Comm, Deptno)
+Vehicle (Vehicleid, Vehiclename)
+Empvehicle (Empno, Vehicleid)
+
+
+ENAME	  DNAME
+JIM	    RESEARCH
+BLAKE	  SALES
+CLARK	  ACCOUNTING
+
+Query :-
+
+SELECT 
+    e.Ename AS "ENAME",
+    d.Dname AS "DNAME"
+FROM 
+    Emp e
+JOIN 
+    Dept d ON e.Deptno = d.Deptno
+WHERE 
+    e.Job = 'MANAGER'
+ORDER BY 
+    e.Ename;
