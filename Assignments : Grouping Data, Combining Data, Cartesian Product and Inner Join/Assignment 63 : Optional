@@ -1,0 +1,33 @@
+Retrieve the name of supplier who has quoted greater than 1000 and the quotation status is closed and average of quoted price is less than 4500. Also display average quoted price.
+Write your query here
+  
+Database structure
+Item (Itemcode, Itemtype, Descr, Price, Reorderlevel, Qtyonhand, Category)
+Quotation (Quotationid, Sname, Itemcode, Quotedprice, Qdate, Qstatus)
+Orders (Orderid, Quotationid, Qtyordered, Orderdate, Status, Pymtdate, Delivereddate, Amountpaid, Pymtmode)
+Retailoutlet (Roid, Location, Managerid)
+Empdetails (Empid, Empname, Designation, Emailid, Contactno, Worksin, Salary)
+Retailstock (Roid, Itemcode, Unitprice, Qtyavailable)
+Customer (Custid, Custtype, Custname, Gender, Spouse, Emailid, Address)
+Purchasebill (Billid, Roid, Itemcode, Custid, Billamount, Billdate, Quantity)
+
+SNAME	Average quoted price
+EBATs    	1400
+
+
+Query :-
+
+SELECT 
+    Sname AS "SNAME",
+    AVG(Quotedprice) AS "Average quoted price"
+FROM 
+    Quotation
+WHERE 
+    Quotedprice > 1000
+    AND Qstatus = 'Closed'
+GROUP BY 
+    Sname
+HAVING 
+    AVG(Quotedprice) < 4500
+ORDER BY 
+    AVG(Quotedprice);
