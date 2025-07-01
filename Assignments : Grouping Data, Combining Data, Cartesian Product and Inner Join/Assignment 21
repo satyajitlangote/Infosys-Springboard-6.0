@@ -1,0 +1,41 @@
+Display itemcode , item description and supplier name for all items for which quotations have been received from suppliers.
+
+
+  
+Database structure
+Item (Itemcode, Itemtype, Descr, Price, Reorderlevel, Qtyonhand, Category)
+Quotation (Quotationid, Sname, Itemcode, Quotedprice, Qdate, Qstatus)
+Orders (Orderid, Quotationid, Qtyordered, Orderdate, Status, Pymtdate, Delivereddate, Amountpaid, Pymtmode)
+Retailoutlet (Roid, Location, Managerid)
+Empdetails (Empid, Empname, Designation, Emailid, Contactno, Worksin, Salary)
+Retailstock (Roid, Itemcode, Unitprice, Qtyavailable)
+Customer (Custid, Custtype, Custname, Gender, Spouse, Emailid, Address)
+Purchasebill (Billid, Roid, Itemcode, Custid, Billamount, Billdate, Quantity)
+
+ITEMCODE	  DESCR      	SNAME
+I1002	      Best Rice	  EBATs
+I1002      	Best Rice	VV       Electronics
+I1005	Levis T-Shirt	Shop Zilla
+I1005	Levis T-Shirt	Giant Store
+I1008	Xbox gamepad	Giant Store
+I1008	Xbox gamepad	EBATs
+I1009	Microsoft Mouse	Giant Store
+I1009	Microsoft Mouse	VV Electronics
+I1010	Intel C2D Processor	EBATs
+I1010	Intel C2D Processor	Shop Zilla
+I1012	500GB Hard disk	Shop Zilla
+I1012	500GB Hard disk	Shop Zilla
+I1012	500GB Hard disk	Giant Store
+
+Query :-
+
+SELECT
+    i.Itemcode AS "ITEMCODE",
+    i.Descr AS "DESCR",
+    q.Sname AS "SNAME"
+FROM 
+    Item i
+JOIN 
+    Quotation q ON i.Itemcode = q.Itemcode
+ORDER BY 
+    i.Itemcode, q.Sname;
