@@ -1,0 +1,32 @@
+Display the job, deptno and average salary of employees belonging to department 10 or 20 and their salary is more than 2000 and average salary is more than 2500.
+
+
+  
+Database structure
+Dept (Deptno, Dname, Loc)
+Emp (Empno, Ename, Job, Mgr, Hiredate, Sal, Comm, Deptno)
+Vehicle (Vehicleid, Vehiclename)
+Empvehicle (Empno, Vehicleid)
+
+JOB  	    DEPTNO	  AVGSALARY
+MANAGER	    20	      2975
+ANALYST	    20	      3000
+PRESIDENT	  10	      5000
+
+Query :-
+
+SELECT 
+    Job AS "JOB",
+    Deptno AS "DEPTNO",
+    AVG(Sal) AS "AVGSALARY"
+FROM 
+    Emp
+WHERE 
+    Deptno IN (10, 20)
+    AND Sal > 2000
+GROUP BY 
+    Job, Deptno
+HAVING 
+    AVG(Sal) > 2500
+ORDER BY 
+    Deptno, Job;
