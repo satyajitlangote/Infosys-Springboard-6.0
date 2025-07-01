@@ -1,0 +1,34 @@
+Refer to the tables emp,dept and empvehicle for the following assignments :
+
+Display name and salary of the employees, who are drawing salary more than 2000. Along with that display the department names in which they are working.
+Write your query here
+  
+Database structure
+Dept (Deptno, Dname, Loc)
+Emp (Empno, Ename, Job, Mgr, Hiredate, Sal, Comm, Deptno)
+Vehicle (Vehicleid, Vehiclename)
+Empvehicle (Empno, Vehicleid)
+
+ENAME	  SAL	      DNAME
+JIM	    2975	   RESEARCH
+BLAKE	  2850	    SALES
+CLARK	  2450	    ACCOUNTING
+SCOTT	  3000	    RESEARCH
+JACK	  5000	    ACCOUNTING
+FORD	  3000	    RESEARCH
+
+
+Query :-
+
+SELECT 
+    e.Ename AS "ENAME",
+    e.Sal AS "SAL",
+    d.Dname AS "DNAME"
+FROM 
+    Emp e
+JOIN 
+    Dept d ON e.Deptno = d.Deptno
+WHERE 
+    e.Sal > 2000
+ORDER BY 
+    e.Sal DESC;
