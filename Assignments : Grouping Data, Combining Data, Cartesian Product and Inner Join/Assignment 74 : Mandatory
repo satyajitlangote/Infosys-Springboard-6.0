@@ -1,0 +1,44 @@
+The management of EasyShop would like to know the retail outlet ids and the details like description, type and retail unit price of items whose retail unit price is more than 1500.
+
+Database structure
+Item (Itemcode, Itemtype, Descr, Price, Reorderlevel, Qtyonhand, Category)
+Quotation (Quotationid, Sname, Itemcode, Quotedprice, Qdate, Qstatus)
+Orders (Orderid, Quotationid, Qtyordered, Orderdate, Status, Pymtdate, Delivereddate, Amountpaid, Pymtmode)
+Retailoutlet (Roid, Location, Managerid)
+Empdetails (Empid, Empname, Designation, Emailid, Contactno, Worksin, Salary)
+Retailstock (Roid, Itemcode, Unitprice, Qtyavailable)
+Customer (Custid, Custtype, Custname, Gender, Spouse, Emailid, Address)
+Purchasebill (Billid, Roid, Itemcode, Custid, Billamount, Billdate, Quantity)
+
+
+
+ROID	    DESCR	              ITEMTYPE	UNITPRICE
+R1001	   Satyapaul Sari	      Apparels	7350
+R1001	   Intel C2D Processor	Computer	6199
+R1001	   Intel Motherboard	  Computer	5340
+R1001	   500GB Hard disk	    Computer	2510
+R1001	   320GB Hard disk	    Computer	2204
+R1001	    Arrow Jeans	        Apparels	7700
+R1002	    Levis T-Shirt	      Apparels	1751
+R1002	    Satyapaul Sari	    Apparels	7499
+R1002	    Xbox gamepad	      Computer	2499
+R1002	    Intel C2D Processor	Computer	6801
+R1002	    Intel Motherboard	  Computer	5402
+R1002	    500GB Hard disk	    Computer	2900.5
+R1002	    320GB Hard disk    	Computer	2300.5
+R1002	    Arrow Jeans	        Apparels	7400
+R1003	    500GB Hard disk    	Computer	3000.5
+R1003	    Arrow Jeans	        Apparels	7800
+R1003	    Xbox gamepad	      Computer	2600
+
+
+Query :-
+
+SELECT rs.roid AS "ROID",
+       i.descr AS "DESCR",
+       i.itemtype AS "ITEMTYPE",
+       rs.unitprice AS "UNITPRICE"
+FROM Retailstock rs
+JOIN Item i ON rs.itemcode = i.itemcode
+WHERE rs.unitprice > 1500
+ORDER BY rs.roid, i.descr;
