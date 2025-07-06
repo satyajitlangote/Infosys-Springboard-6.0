@@ -1,0 +1,28 @@
+This assignment must be done in Eclipse environment.
+
+Display custname and billamount for those customers who have shopped for more than 5000.
+
+  
+Database structure
+Item (Itemcode, Itemtype, Descr, Price, Reorderlevel, Qtyonhand, Category)
+Quotation (Quotationid, Sname, Itemcode, Quotedprice, Qdate, Qstatus)
+Orders (Orderid, Quotationid, Qtyordered, Orderdate, Status, Pymtdate, Delivereddate, Amountpaid, Pymtmode)
+Retailoutlet (Roid, Location, Managerid)
+Empdetails (Empid, Empname, Designation, Emailid, Contactno, Worksin, Salary)
+Retailstock (Roid, Itemcode, Unitprice, Qtyavailable)
+Customer (Custid, Custtype, Custname, Gender, Spouse, Emailid, Address)
+Purchasebill (Billid, Roid, Itemcode, Custid, Billamount, Billdate, Quantity)
+
+CUSTNAME	  BILLAMOUNT
+Jason        	7846.3
+Susan	        5092.96
+Nancy	      5441.46
+Dexter	      8983.5
+Thomas	      6930.22
+
+Query :-
+
+SELECT c.Custname, p.Billamount
+FROM Customer c
+JOIN Purchasebill p ON c.Custid = p.Custid
+WHERE p.Billamount > 5000;
