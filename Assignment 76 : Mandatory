@@ -1,0 +1,23 @@
+The management wants the item code and description of the items whose item price matches with the quotation price for more than one quotation.
+
+  
+Database structure
+Item (Itemcode, Itemtype, Descr, Price, Reorderlevel, Qtyonhand, Category)
+Quotation (Quotationid, Sname, Itemcode, Quotedprice, Qdate, Qstatus)
+Orders (Orderid, Quotationid, Qtyordered, Orderdate, Status, Pymtdate, Delivereddate, Amountpaid, Pymtmode)
+Retailoutlet (Roid, Location, Managerid)
+Empdetails (Empid, Empname, Designation, Emailid, Contactno, Worksin, Salary)
+Retailstock (Roid, Itemcode, Unitprice, Qtyavailable)
+Customer (Custid, Custtype, Custname, Gender, Spouse, Emailid, Address)
+Purchasebill (Billid, Roid, Itemcode, Custid, Billamount, Billdate, Quantity)
+
+
+ITEMCODE  	DESCR
+I1002      	Best Rice
+
+Query :-
+SELECT i.Itemcode, i.Descr
+FROM Item i
+JOIN Quotation q ON i.Itemcode = q.Itemcode AND i.Price = q.Quotedprice
+GROUP BY i.Itemcode, i.Descr
+HAVING COUNT(*) > 1;
