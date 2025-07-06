@@ -1,0 +1,36 @@
+Display location, category and the total quantity sold location and category wise.
+
+  
+Database structure
+Salesman (Sid, Sname, Location)
+Product (Prodid, Pdesc, Price, Category, Discount)
+Sale (Saleid, Sid, Sldate, Amount)
+Saledetail (Saleid, Prodid, Quantity)
+
+LOCATION	  CATEGORY  	Total Quantity
+Paris      	ELECTRONICS    	1
+Chicago	    Sports	        2
+Paris      	Sports	        3
+London	    Electronics    	2
+London	    Sports         	4
+London	    ELECTRONICS      	3
+London	    Apparel	          11
+
+Query :-
+
+SELECT 
+    sm.Location,
+    p.Category,
+    COALESCE(SUM(sd.Quantity), 0) AS "Total Quantity"
+FROM 
+    Salesman sm
+JOIN 
+    Sale s ON sm.Sid = s.Sid
+JOIN 
+    Saledetail sd ON s.Saleid = sd.Saleid
+JOIN 
+    Product p ON sd.Prodid = p.Prodid
+GROUP BY 
+    sm.Location, p.Category
+ORDER BY 
+    sm.Location, p.Category;
