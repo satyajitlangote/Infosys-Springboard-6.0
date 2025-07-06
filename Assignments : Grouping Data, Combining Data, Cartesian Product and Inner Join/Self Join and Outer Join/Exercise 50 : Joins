@@ -1,0 +1,33 @@
+Display the salesmen id, salesmen name, total sale amount and total discount by salesman who have made sales. Display the result in descending order of total sale amount and total discount.The sales amount for one sale can be calculated from price and quantity. The discount for one sale can be calculated from price, quantity and discount.
+
+  
+Database structure
+Salesman (Sid, Sname, Location)
+Product (Prodid, Pdesc, Price, Category, Discount)
+Sale (Saleid, Sid, Sldate, Amount)
+Saledetail (Saleid, Prodid, Quantity)
+
+SID	  SNAME	    TAMOUNT	        TDISCOUNT
+1	    Peter	      360	            57
+5	    Kevin	      110	            10.5
+2	    Michael	    70	             9.5
+4	    Harry	      30                4.
+
+Query :-
+SELECT 
+    s.Sid,
+    s.Sname,
+    SUM(p.Price * sd.Quantity) AS TAMOUNT,
+    SUM(p.Price * sd.Quantity * (p.Discount / 100)) AS TDISCOUNT
+FROM 
+    Salesman s
+JOIN 
+    Sale sa ON s.Sid = sa.Sid
+JOIN 
+    Saledetail sd ON sa.Saleid = sd.Saleid
+JOIN 
+    Product p ON sd.Prodid = p.Prodid
+GROUP BY 
+    s.Sid, s.Sname
+ORDER BY 
+    TAMOUNT DESC, TDISCOUNT DESC;
