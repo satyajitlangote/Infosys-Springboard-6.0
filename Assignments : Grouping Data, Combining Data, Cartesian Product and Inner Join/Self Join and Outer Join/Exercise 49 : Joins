@@ -1,0 +1,22 @@
+Display salesmen name and sale id of their sales. Consider SaleId as NULL if a Salesman has not made any sale.
+
+Database structure
+Salesman (Sid, Sname, Location)
+Product (Prodid, Pdesc, Price, Category, Discount)
+Sale (Saleid, Sid, Sldate, Amount)
+Saledetail (Saleid, Prodid, Quantity)
+
+SNAME	    SALEID
+Peter    	1001
+Kevin    	1002
+Harry    	1003
+Peter    	1004
+Michael	   1005
+Peter	    1006
+Alex	    NULL
+John	    NULL
+
+Query :-
+SELECT s.Sname, sa.Saleid
+FROM Salesman s
+LEFT OUTER JOIN Sale sa ON s.Sid = sa.Sid;
