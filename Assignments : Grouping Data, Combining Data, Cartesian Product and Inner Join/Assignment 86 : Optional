@@ -1,0 +1,23 @@
+Retrieve the retailoutlet and the number of items stocked for that outlet
+
+  
+Database structure
+Item (Itemcode, Itemtype, Descr, Price, Reorderlevel, Qtyonhand, Category)
+Quotation (Quotationid, Sname, Itemcode, Quotedprice, Qdate, Qstatus)
+Orders (Orderid, Quotationid, Qtyordered, Orderdate, Status, Pymtdate, Delivereddate, Amountpaid, Pymtmode)
+Retailoutlet (Roid, Location, Managerid)
+Empdetails (Empid, Empname, Designation, Emailid, Contactno, Worksin, Salary)
+Retailstock (Roid, Itemcode, Unitprice, Qtyavailable)
+Customer (Custid, Custtype, Custname, Gender, Spouse, Emailid, Address)
+Purchasebill (Billid, Roid, Itemcode, Custid, Billamount, Billdate, Quantity)
+
+ROID	Number of items
+R1001    	11
+R1002	     15
+R1003	      3
+
+Query :-
+
+SELECT Roid, COUNT(Itemcode) AS "Number of items"
+FROM Retailstock
+GROUP BY Roid;
