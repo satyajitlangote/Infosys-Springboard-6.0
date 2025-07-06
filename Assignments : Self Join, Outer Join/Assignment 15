@@ -1,0 +1,41 @@
+Refer to the tables emp,dept and empvehicle for the following assignments :
+
+For each employee, identify the vehicle owned by them. Display ename and vehiclename for the same. Display name of employees even if they don't own any vehicle.
+
+  
+Database structure
+Dept (Deptno, Dname, Loc)
+Emp (Empno, Ename, Job, Mgr, Hiredate, Sal, Comm, Deptno)
+Vehicle (Vehicleid, Vehiclename)
+Empvehicle (Empno, Vehicleid)
+Query Result
+Expected Result
+ENAME	VEHICLENAME
+JIM	Toyota
+BLAKE	Maruti
+JACK	Maruti
+FORD	Nissan
+SCOTT	Hyundai
+CLARK	NULL
+ADAMS	NULL
+WARD	NULL
+ALLEN	NULL
+JAMES	NULL
+SMITH	NULL
+MILLER	NULL
+MARTIN	NULL
+TURNER	NULL
+
+
+Query :-
+SELECT 
+    e.Ename,
+    v.Vehiclename
+FROM 
+    Emp e
+LEFT JOIN 
+    Empvehicle ev ON e.Empno = ev.Empno
+LEFT JOIN 
+    Vehicle v ON ev.Vehicleid = v.Vehicleid
+ORDER BY 
+    e.Ename;
