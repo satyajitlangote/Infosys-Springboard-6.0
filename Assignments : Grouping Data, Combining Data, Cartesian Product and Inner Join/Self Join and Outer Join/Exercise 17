@@ -1,0 +1,37 @@
+Display the salesmen id, salesmen name, total sale amount and total discount by salesman who have made sales. The total sale amount and total discount should appear as 0(Zero) for those Salesmen who were not able to make any sale.The sales amount for one sale can be calculated from price and quantity and discount.
+
+  
+Database structure
+Salesman (Sid, Sname, Location)
+Product (Prodid, Pdesc, Price, Category, Discount)
+Sale (Saleid, Sid, Sldate, Amount)
+Saledetail (Saleid, Prodid, Quantity)
+
+SID	  SNAME	   TAMOUNT	  TDISCOUNT
+5    	Kevin	    110	        10.5
+6	    Alex	    0            	0
+3	    John    	0            	0
+2	    Michael  	70	          9.5
+4    	Harry    	30          	4.5
+1	    Peter    	360          	57
+
+Query :-
+
+
+SELECT 
+    sm.Sid,
+    sm.Sname,
+    COALESCE(SUM(p.Price * sd.Quantity), 0) AS TAMOUNT,
+    COALESCE(SUM(p.Price * sd.Quantity * p.Discount / 100), 0) AS TDISCOUNT
+FROM 
+    Salesman sm
+LEFT JOIN 
+    Sale s ON sm.Sid = s.Sid
+LEFT JOIN 
+    Saledetail sd ON s.Saleid = sd.Saleid
+LEFT JOIN 
+    Product p ON sd.Prodid = p.Prodid
+GROUP BY 
+    sm.Sid, sm.Sname
+ORDER BY 
+    TAMOUNT DESC;
