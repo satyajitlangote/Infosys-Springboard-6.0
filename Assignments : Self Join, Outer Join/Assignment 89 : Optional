@@ -1,0 +1,58 @@
+The management of EasyShop would like to know the qtyavailable for items at retail outlets. Display itemcode, description, qtyavailable and roid for those items.
+
+  
+Database structure
+Item (Itemcode, Itemtype, Descr, Price, Reorderlevel, Qtyonhand, Category)
+Quotation (Quotationid, Sname, Itemcode, Quotedprice, Qdate, Qstatus)
+Orders (Orderid, Quotationid, Qtyordered, Orderdate, Status, Pymtdate, Delivereddate, Amountpaid, Pymtmode)
+Retailoutlet (Roid, Location, Managerid)
+Empdetails (Empid, Empname, Designation, Emailid, Contactno, Worksin, Salary)
+Retailstock (Roid, Itemcode, Unitprice, Qtyavailable)
+Customer (Custid, Custtype, Custname, Gender, Spouse, Emailid, Address)
+Purchasebill (Billid, Roid, Itemcode, Custid, Billamount, Billdate, Quantity)
+
+ITEMCODE	DESCR	ROID	QTYAVAILABLE
+I1001	Britannia Marie Gold Cookies	R1001	28
+I1002	Best Rice	R1001	20
+I1003	Modern Bread	R1001	20
+I1004	Lee T-Shirt	R1001	100
+I1007	Allen Solly Tie	R1001	50
+I1006	Satyapaul Sari	R1001	20
+I1010	Intel C2D Processor	R1001	100
+I1011	Intel Motherboard	R1001	150
+I1012	500GB Hard disk	R1001	50
+I1013	320GB Hard disk	R1001	50
+I1015	Arrow Jeans	R1001	60
+I1001	Britannia Marie Gold Cookies	R1002	25
+I1002	Best Rice	R1002	50
+I1003	Modern Bread	R1002	20
+I1004	Lee T-Shirt	R1002	110
+I1005	Levis T-Shirt	R1002	60
+I1006	Satyapaul Sari	R1002	50
+I1007	Allen Solly Tie	R1002	20
+I1008	Xbox gamepad	R1002	70
+I1009	Microsoft Mouse	R1002	80
+I1010	Intel C2D Processor	R1002	20
+I1011	Intel Motherboard	R1002	30
+I1012	500GB Hard disk	R1002	130
+I1013	320GB Hard disk	R1002	60
+I1014	Aroma Bread	R1002	75
+I1015	Arrow Jeans	R1002	65
+I1012	500GB Hard disk	R1003	50
+I1015	Arrow Jeans	R1003	40
+I1008	Xbox gamepad	R1003	30
+
+
+Query :-
+SELECT 
+    rs.Itemcode AS ITEMCODE,
+    i.Descr AS DESCR,
+    rs.Roid AS ROID,
+    rs.Qtyavailable AS QTYAVAILABLE
+FROM 
+    Retailstock rs
+JOIN 
+    Item i ON rs.Itemcode = i.Itemcode
+ORDER BY 
+    rs.Roid, 
+    rs.Itemcode;
