@@ -1,0 +1,24 @@
+Display name and department of employees along with the model of the computer allocated to them. Employee details must be displayed with 'Not allocated' against the model column if computer is not allocated to the person.
+
+  
+Database structure
+Computer (Compid, Make, Model, Myear)
+Employee (Id, Ename, Doj, Salary, Bonus, Dept, Designation, Manager, Compid)
+
+
+ENAME	          DEPT	    MODEL
+James Potter  	ICP      	Vostro
+Ethan McCarty  	ETA      	Not allocated
+Emily Rayner	  ETA      	Precision
+Jack Abraham  	ETA      	Not allocated
+Ayaz Mohammad  	ICP	      Edge
+
+Query:-
+SELECT 
+    E.Ename, 
+    E.Dept, 
+    NVL(C.Model, 'Not allocated') AS Model
+FROM 
+    Employee E
+LEFT JOIN 
+    Computer C ON E.Compid = C.Compid;
