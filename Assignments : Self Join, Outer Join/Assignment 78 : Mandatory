@@ -1,0 +1,43 @@
+Display manager name, category and category wise total quantity of items available in all retail outlet. Display manager name as 'No Manager' if no manager is appointed for the retail outlet.
+Write your query here
+  
+Database structure
+Item (Itemcode, Itemtype, Descr, Price, Reorderlevel, Qtyonhand, Category)
+Quotation (Quotationid, Sname, Itemcode, Quotedprice, Qdate, Qstatus)
+Orders (Orderid, Quotationid, Qtyordered, Orderdate, Status, Pymtdate, Delivereddate, Amountpaid, Pymtmode)
+Retailoutlet (Roid, Location, Managerid)
+Empdetails (Empid, Empname, Designation, Emailid, Contactno, Worksin, Salary)
+Retailstock (Roid, Itemcode, Unitprice, Qtyavailable)
+Customer (Custid, Custtype, Custname, Gender, Spouse, Emailid, Address)
+Purchasebill (Billamount, Billdate, Quantity, Billid, Roid, Itemcode, Custid)
+Query Result
+Expected Result
+EMPNAME	CATEGORY	TOTALQUANTITY
+John	      A        	165
+Kevin      	A	        330
+John	      C	        270  
+Kevin	      C	        118
+No Manager	 B        	80
+John	        B	        430
+No Manager	  A	          40
+Kevin	        B	            200
+
+
+
+Query :-
+
+SELECT 
+    NVL(E.Empname, 'No Manager') AS EMPNAME,
+    I.Category,
+    SUM(RS.Qtyavailable) AS TOTALQUANTITY
+FROM 
+    Retailstock RS
+JOIN 
+    Item I ON RS.Itemcode = I.Itemcode
+JOIN 
+    Retailoutlet RO ON RS.Roid = RO.Roid
+LEFT JOIN 
+    Empdetails E ON RO.Managerid = E.Empid
+GROUP BY 
+    NVL(E.Empname, 'No Manager'), I.Category;
+
