@@ -1,0 +1,36 @@
+The management of EasyShop would like to know the description, type of items and amount billed to customers for retail outlet 'R1001'.
+Write your query here
+  
+Database structure
+Item (Itemcode, Itemtype, Descr, Price, Reorderlevel, Qtyonhand, Category)
+Quotation (Quotationid, Sname, Itemcode, Quotedprice, Qdate, Qstatus)
+Orders (Orderid, Quotationid, Qtyordered, Orderdate, Status, Pymtdate, Delivereddate, Amountpaid, Pymtmode)
+Retailoutlet (Roid, Location, Managerid)
+Empdetails (Empid, Empname, Designation, Emailid, Contactno, Worksin, Salary)
+Retailstock (Roid, Itemcode, Unitprice, Qtyavailable)
+Customer (Custid, Custtype, Custname, Gender, Spouse, Emailid, Address)
+Purchasebill (Billid, Roid, Itemcode, Custid, Billamount, Billdate, Quantity)
+Query Result
+Expected Result
+DESCR	                      ITEMTYPE	BILLAMOUNT
+Britannia Marie Gold Cookies	FMCG	    86.62
+Best Rice                    	FMCG	    342.38
+Lee T-Shirt	                  Apparels	359.71
+Intel Motherboard	 Computer	5441.46
+320GB Hard disk	Computer	8983.5
+Arrow Jeans	Apparels	7846.3
+
+Query:-
+SELECT 
+    i.Descr AS DESCR,
+    i.Itemtype AS ITEMTYPE,
+    pb.Billamount AS BILLAMOUNT
+FROM 
+    Purchasebill pb
+JOIN 
+    Item i ON pb.Itemcode = i.Itemcode
+WHERE 
+    pb.Roid = 'R1001'
+ORDER BY 
+    i.Itemtype, 
+    pb.Billamount DESC;
