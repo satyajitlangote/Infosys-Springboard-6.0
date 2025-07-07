@@ -1,0 +1,34 @@
+Retrieve employee name, designation, and email id of those employees who work in the same retail outlet where George works. Do not display the record of George in the result.
+
+  
+Database structure
+Item (Itemcode, Itemtype, Descr, Price, Reorderlevel, Qtyonhand, Category)
+Quotation (Quotationid, Sname, Itemcode, Quotedprice, Qdate, Qstatus)
+Orders (Orderid, Quotationid, Qtyordered, Orderdate, Status, Pymtdate, Delivereddate, Amountpaid, Pymtmode)
+Retailoutlet (Roid, Location, Managerid)
+Empdetails (Empid, Empname, Designation, Emailid, Contactno, Worksin, Salary)
+Retailstock (Itemcode, Unitprice, Qtyavailable, Roid)
+Customer (Custid, Custtype, Custname, Gender, Spouse, Emailid, Address)
+Purchasebill (Billid, Roid, Itemcode, Custid, Billamount, Billdate, Quantity)
+
+EMPNAME	  DESIGNATION	    EMAILID
+Kevin    	Manager      	kevin@easy.com
+Lisa	    Billing Staff	lisa@easy.com
+Cris	    Billing Staff	cris@easy.com
+Donald	  Billing Staff	donald@easy.com
+Clara	    Security	    clara@easy.com
+
+
+Query :-
+
+SELECT 
+    e.Empname AS EMPNAME,
+    e.Designation AS DESIGNATION,
+    e.Emailid AS EMAILID
+FROM 
+    Empdetails e
+WHERE 
+    e.Worksin = (SELECT Worksin FROM Empdetails WHERE Empname = 'George')
+    AND e.Empname != 'George'
+ORDER BY 
+    e.Empname;
