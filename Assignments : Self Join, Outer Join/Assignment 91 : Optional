@@ -1,0 +1,31 @@
+Retrieve the customer id, customer name, and customer type of those customers who are of the same customer type as that of customer id 2004. Do not display the record of customer id 2004 in the result.
+Write your query here
+  
+Database structure
+Item (Itemcode, Itemtype, Descr, Price, Reorderlevel, Qtyonhand, Category)
+Quotation (Quotationid, Sname, Itemcode, Quotedprice, Qdate, Qstatus)
+Orders (Orderid, Quotationid, Qtyordered, Orderdate, Status, Pymtdate, Delivereddate, Amountpaid, Pymtmode)
+Retailoutlet (Roid, Location, Managerid)
+Empdetails (Empid, Empname, Designation, Emailid, Contactno, Worksin, Salary)
+Retailstock (Roid, Itemcode, Unitprice, Qtyavailable)
+Customer (Custid, Custtype, Custname, Gender, Spouse, Emailid, Address)
+Purchasebill (Billid, Roid, Itemcode, Custid, Billamount, Billdate, Quantity)
+Query Result
+Expected Result
+CUSTID	CUSTNAME	CUSTTYPE
+2003	Sam	Privileged
+2005	Nancy	Privileged
+
+Query:-
+
+SELECT 
+    c.Custid,
+    c.Custname,
+    c.Custtype
+FROM 
+    Customer c
+WHERE 
+    c.Custtype = (SELECT Custtype FROM Customer WHERE Custid = 2004)
+    AND c.Custid != 2004
+ORDER BY 
+    c.Custid;
