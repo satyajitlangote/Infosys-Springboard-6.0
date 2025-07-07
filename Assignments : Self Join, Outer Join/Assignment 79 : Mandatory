@@ -1,0 +1,36 @@
+Display retailoutlet location and customer type wise total quantity of items sold where customer's gender is Male and item type is Apparels or Computer.
+Write your query here
+  
+Database structure
+Item (Itemcode, Itemtype, Descr, Price, Reorderlevel, Qtyonhand, Category)
+Quotation (Quotationid, Sname, Itemcode, Quotedprice, Qdate, Qstatus)
+Orders (Orderid, Quotationid, Qtyordered, Orderdate, Status, Pymtdate, Delivereddate, Amountpaid, Pymtmode)
+Retailoutlet (Roid, Location, Managerid)
+Empdetails (Empid, Empname, Designation, Emailid, Contactno, Worksin, Salary)
+Retailstock (Roid, Itemcode, Unitprice, Qtyavailable)
+Customer (Custid, Custtype, Custname, Gender, Spouse, Emailid, Address)
+Purchasebill (Billid, Roid, Itemcode, Custid, Billamount, Billdate, Quantity)
+
+
+
+LOCATION	  CUSTTYPE	  TOTALQUANTITY
+California	Regular	        6
+New York	  Regular	        4
+
+Query :-
+SELECT 
+    ro.Location AS LOCATION,
+    c.Custtype AS CUSTTYPE,
+    SUM(pb.Quantity) AS TOTALQUANTITY
+FROM 
+    Purchasebill pb
+    JOIN Retailoutlet ro ON pb.Roid = ro.Roid
+    JOIN Customer c ON pb.Custid = c.Custid
+    JOIN Item i ON pb.Itemcode = i.Itemcode
+WHERE 
+    c.Gender = 'Male'
+    AND (i.Itemtype = 'Apparels' OR i.Itemtype = 'Computer')
+GROUP BY 
+    ro.Location, c.Custtype
+ORDER BY 
+    ro.Location, c.Custtype;
