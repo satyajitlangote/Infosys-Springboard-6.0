@@ -1,0 +1,33 @@
+Display the product id, category and price of those products whose price is same.
+
+  
+Database structure
+Salesman (Sid, Sname, Location)
+Product (Prodid, Pdesc, Price, Category, Discount)
+Sale (Saleid, Sid, Sldate, Amount)
+Saledetail (Saleid, Prodid, Quantity)
+
+PRODID  	CATEGORY	  PRICE
+105      	Apparel      	10
+104	      Sports	      20
+102	      Apparel	      20
+101      	Sports      	10
+
+Query :-
+SELECT 
+    Prodid, 
+    Category, 
+    Price
+FROM 
+    Product
+WHERE 
+    Price IN (
+        SELECT 
+            Price
+        FROM 
+            Product
+        GROUP BY 
+            Price
+        HAVING 
+            COUNT(*) > 1
+    );
