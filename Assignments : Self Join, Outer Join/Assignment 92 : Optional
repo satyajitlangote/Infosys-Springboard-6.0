@@ -1,0 +1,52 @@
+Identify the quotations submitted by the supplier for each item of type 'Computer' or 'FMCG'. Display itemtype, description and quotationid for the same. If the quotation has not been received for an item, display 'No quotation received' for quotationid.
+Write your query here
+  
+Database structure
+Item (Itemcode, Itemtype, Descr, Price, Reorderlevel, Qtyonhand, Category)
+Quotation (Quotationid, Sname, Itemcode, Quotedprice, Qdate, Qstatus)
+Orders (Orderid, Quotationid, Qtyordered, Orderdate, Status, Pymtdate, Delivereddate, Amountpaid, Pymtmode)
+Retailoutlet (Roid, Location, Managerid)
+Empdetails (Empid, Empname, Designation, Emailid, Contactno, Worksin, Salary)
+Retailstock (Roid, Itemcode, Unitprice, Qtyavailable)
+Customer (Custid, Custtype, Custname, Gender, Spouse, Emailid, Address)
+Purchasebill (Billid, Roid, Itemcode, Custid, Billamount, Billdate, Quantity)
+Query Result
+Expected Result
+ITEMTYPE	DESCR	Available Quotation number
+Computer	Xbox gamepad	Q1001
+Computer	Xbox gamepad	Q1002
+Computer	Intel C2D Processor	Q1003
+Computer	Intel C2D Processor	Q1004
+Computer	Microsoft Mouse	Q1005
+Computer	Microsoft Mouse	Q1006
+Computer	500GB Hard disk	Q1007
+Computer	500GB Hard disk	Q1008
+FMCG	Best Rice	Q1011
+FMCG	Best Rice	Q1012
+Computer	500GB Hard disk	Q1013
+Computer	320GB Hard disk	No quotation received
+Computer	Intel Motherboard	No quotation received
+FMCG	Britannia Marie Gold Cookies	No quotation received
+FMCG	Modern Bread	No quotation received
+FMCG	Aroma Bread	No quotation received
+
+
+
+
+Query :-
+
+SELECT 
+    i.Itemtype AS ITEMTYPE,
+    i.Descr AS DESCR,
+    COALESCE(q.Quotationid, 'No quotation received') AS "Available Quotation number"
+FROM 
+    Item i
+LEFT JOIN 
+    Quotation q ON i.Itemcode = q.Itemcode
+WHERE 
+    i.Itemtype IN ('Computer', 'FMCG')
+ORDER BY 
+    i.Itemtype,
+    i.Descr,
+    CASE WHEN q.Quotationid IS NULL THEN 1 ELSE 0 END,
+    q.Quotationid;
