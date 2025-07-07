@@ -1,0 +1,32 @@
+Display the customer id and customer name of those customers who are co-located. Do not display the duplicate records/rows.
+
+  
+Database structure
+Item (Itemcode, Itemtype, Descr, Price, Reorderlevel, Qtyonhand, Category)
+Quotation (Quotationid, Sname, Itemcode, Quotedprice, Qdate, Qstatus)
+Orders (Orderid, Quotationid, Qtyordered, Orderdate, Status, Pymtdate, Delivereddate, Amountpaid, Pymtmode)
+Retailoutlet (Roid, Location, Managerid)
+Empdetails (Empid, Empname, Designation, Emailid, Contactno, Worksin, Salary)
+Retailstock (Roid, Itemcode, Unitprice, Qtyavailable)
+Customer (Custid, Custtype, Custname, Gender, Spouse, Emailid, Address)
+Purchasebill (Billid, Roid, Itemcode, Custid, Billamount, Billdate, Quantity)
+
+CUSTID	CUSTNAME
+2002	  Jason
+2004	  Susan
+2008	  Thomas
+2009	  Christina
+2001	  John
+2010	  Megan
+
+Query :-
+
+SELECT DISTINCT c1.Custid, c1.Custname
+FROM Customer c1
+WHERE EXISTS (
+    SELECT 1
+    FROM Customer c2
+    WHERE c1.Address = c2.Address
+    AND c1.Custid != c2.Custid
+)
+ORDER BY c1.Custid;
