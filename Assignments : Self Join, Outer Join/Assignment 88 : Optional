@@ -1,0 +1,50 @@
+Identify the quotations submitted for all items. Display itemcode, item description and quotationid for the same. If the item does not have any quotation, display 'No quotation received' for quotationid.
+
+Database structure
+Item (Itemcode, Itemtype, Descr, Price, Reorderlevel, Qtyonhand, Category)
+Quotation (Quotationid, Sname, Itemcode, Quotedprice, Qdate, Qstatus)
+Orders (Orderid, Quotationid, Qtyordered, Orderdate, Status, Pymtdate, Delivereddate, Amountpaid, Pymtmode)
+Retailoutlet (Roid, Location, Managerid)
+Empdetails (Empid, Empname, Designation, Emailid, Contactno, Worksin, Salary)
+Retailstock (Roid, Itemcode, Unitprice, Qtyavailable)
+Customer (Custid, Custtype, Custname, Gender, Spouse, Emailid, Address)
+Purchasebill (Billid, Roid, Itemcode, Custid, Billamount, Billdate, Quantity)
+
+ITEMCODE	DESCR	QUOTATIONID
+I1008	Xbox gamepad	Q1001
+I1008	Xbox gamepad	Q1002
+I1010	Intel C2D Processor	Q1003
+I1010	Intel C2D Processor	Q1004
+I1009	Microsoft Mouse	Q1005
+I1009	Microsoft Mouse	Q1006
+I1012	500GB Hard disk	Q1007
+I1012	500GB Hard disk	Q1008
+I1005	Levis T-Shirt	Q1009
+I1005	Levis T-Shirt	Q1010
+I1002	Best Rice	Q1011
+I1002	Best Rice	Q1012
+I1012	500GB Hard disk	Q1013
+I1013	320GB Hard disk	No quotation received
+I1011	Intel Motherboard	No quotation received
+I1001	Britannia Marie Gold Cookies	No quotation received
+I1006	Satyapaul Sari	No quotation received
+I1015	Arrow Jeans	No quotation received
+I1004	Lee T-Shirt	No quotation received
+I1003	Modern Bread	No quotation received
+I1007	Allen Solly Tie	No quotation received
+I1014	Aroma Bread	No quotation received
+
+
+Query :-
+
+SELECT 
+    i.Itemcode, 
+    i.Descr, 
+    COALESCE(q.Quotationid, 'No quotation received') AS QUOTATIONID
+FROM 
+    Item i
+LEFT JOIN 
+    Quotation q ON i.Itemcode = q.Itemcode
+ORDER BY 
+    i.Itemcode, 
+    q.Quotationid;
