@@ -1,0 +1,27 @@
+Display id, name, manager id and manager name of those employees who are allocated a computer and whose manager is also allocated a computer. Also display the model of computer allocated to the employee and the manager.
+
+  
+Database structure
+Computer (Compid, Make, Model, Myear)
+Employee (Id, Ename, Doj, Salary, Bonus, Dept, Designation, Manager, Compid)
+
+ID	    ENAME	        MGRID	      MGRNAME	      E_MODEL	        M_MODEL
+5      	Ayaz Mohammad	  1	        James Potter	Edge	          Vostro
+
+Query :-
+
+SELECT 
+    E.Id AS ID,
+    E.Ename AS ENAME,
+    E.Manager AS MGRID,
+    M.Ename AS MGRNAME,
+    C1.Model AS E_MODEL,
+    C2.Model AS M_MODEL
+FROM 
+    Employee E
+JOIN 
+    Employee M ON E.Manager = M.Id
+JOIN 
+    Computer C1 ON E.Compid = C1.Compid
+JOIN 
+    Computer C2 ON M.Compid = C2.Compid;
