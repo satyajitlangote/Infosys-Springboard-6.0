@@ -1,0 +1,41 @@
+For items of type Apparels, identify quantity available at each retail outlet location. Display itemcode, item description, quantity available and retail outlet location.
+
+  
+Database structure
+Item (Itemcode, Itemtype, Descr, Price, Reorderlevel, Qtyonhand, Category)
+Quotation (Quotationid, Sname, Itemcode, Quotedprice, Qdate, Qstatus)
+Orders (Orderid, Quotationid, Qtyordered, Orderdate, Status, Pymtdate, Delivereddate, Amountpaid, Pymtmode)
+Retailoutlet (Roid, Location, Managerid)
+Empdetails (Empid, Empname, Designation, Emailid, Contactno, Worksin, Salary)
+Retailstock (Roid, Itemcode, Unitprice, Qtyavailable)
+Customer (Custid, Custtype, Custname, Gender, Spouse, Emailid, Address)
+Purchasebill (Billid, Roid, Itemcode, Custid, Billamount, Billdate, Quantity)
+
+ITEMCODE  	DESCR	        LOCATION	    QTYAVAILABLE
+I1004	      Lee T-Shirt	    California	    100
+I1007	      Allen Solly Tie	 California	    50
+I1006      	Satyapaul Sari	California	    20
+I1015	      Arrow Jeans	    California	    60
+I1004	      Lee T-Shirt	    New York	      110
+I1005	      Levis T-Shirt	  New York	      60
+I1006	      Satyapaul Sari	New York	      50
+I1007	      Allen Solly Tie	New York	      20
+I1015	      Arrow Jeans	    New York	      65
+I1015	      Arrow Jeans	    Dallas	        40
+QUERY :-
+
+SELECT 
+    i.Itemcode AS ITEMCODE,
+    i.Descr AS DESCR,
+    ro.Location AS LOCATION,
+    rs.Qtyavailable AS QTYAVAILABLE
+FROM 
+    Item i
+JOIN 
+    Retailstock rs ON i.Itemcode = rs.Itemcode
+JOIN 
+    Retailoutlet ro ON rs.Roid = ro.Roid
+WHERE 
+    i.Itemtype = 'Apparels'
+ORDER BY 
+    i.Itemcode, ro.Location;
